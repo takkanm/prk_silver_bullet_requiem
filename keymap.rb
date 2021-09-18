@@ -56,4 +56,21 @@ kbd.define_mode_key :CMD_LANG2,   [ :KC_LANG2,             :KC_RGUI,            
 #  # You'll be also able to write `invert_ctl`, `invert_alt` and `invert_gui`
 #end
 
+# Initialize RGBLED with pin, underglow_size, backlight_size and is_rgbw.
+rgb = RGB.new(
+  0,    # pin number
+  0,    # size of underglow pixel
+  22,   # size of backlight pixel
+  false # 32bit data will be sent to a pixel if true while 24bit if false
+)
+# Set an effect
+#  `nil` or `:off` for turning off, `:breathing` for "color breathing", `:rainbow` for "rainbow snaking"
+rgb.effect = :rainbow
+# rgb.effect = :breathing
+# Set an action when you input
+#  `nil` or `:off` for turning off
+# rgb.action = :thunder
+# Append the feature. Will possibly be able to write `Keyboard#append(OLED.new)` in the future
+kbd.append rgb
+
 kbd.start!
